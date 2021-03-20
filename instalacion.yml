@@ -1,0 +1,7 @@
+- name: PlayBook de WordPress+MySQL
+  hosts: wordpress
+  remote_user: root
+  become: true
+  roles:
+    - { role: mysql }
+    - { role: wordpress }
