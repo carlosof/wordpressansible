@@ -1,0 +1,29 @@
+- name: Actualizar repositorios de ubuntu
+  become: true
+  apt:
+    upgrade: 'yes'
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Instalar PyMySql
+  become: true
+  apt:
+    name: python3-pymysql
+    state: latest
+
+- name: Instalar MySQL
+  become: true
+  apt:
+    name: mysql-server
+    state: latest
+
+- name: Iniciar MySql
+  service: name=mysql state=started enabled=true
+
+- name: Contraseña de root
+  mysql_user:
+    name: root
+    password: "admin1234"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- include_tasks: tablasyusuarios.yml

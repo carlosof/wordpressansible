@@ -1,0 +1,14 @@
+- name: Actualizar repositorios de ubuntu
+  become: true
+  apt:
+    upgrade: 'yes'
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Instalar Apache2
+  become: true
+  apt:
+    name: apache2
+    state: latest
+
+- include_tasks: adicionales.yml

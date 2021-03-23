@@ -1,0 +1,5 @@
+- name: Instalar PhPMyAdmin
+  apt:
+    name: phpmyadmin
+
+- include: config.yml

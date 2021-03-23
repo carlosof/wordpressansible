@@ -1,7 +1,27 @@
-- name: PlayBook de WordPress+MySQL
-  hosts: wordpress
+- name: Instalacion y configuracion de MySql
+  hosts: mysql
   remote_user: root
   become: true
   roles:
     - { role: mysql }
+
+- name: Instalacion de Apache
+  hosts: wordpress
+  remote_user: root
+  become: true
+  roles:
+    - { role: apache }
+
+#- name: Instalacion de PhPMyAdmin
+#  hosts: wordpress
+#  remote_user: root
+#  become: true
+#  roles:
+#    - { role: phpmyadmin }
+
+- name: Instalacion de WordPress
+  hosts: wordpress
+  remote_user: root
+  become: true
+  roles:
     - { role: wordpress }

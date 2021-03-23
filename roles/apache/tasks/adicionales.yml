@@ -1,0 +1,55 @@
+- name: Instalar PhP
+  become: true
+  apt:
+    name: php
+    state: latest
+- name: Instalar PhP-Cli
+  become: true
+  apt:
+    name: php-cli
+    state: latest
+- name: Instalar PhP-fpm
+  become: true
+  apt:
+    name: php-fpm
+    state: latest
+- name: Instalar PhP-gd
+  become: true
+  apt:
+    name: php-gd
+    state: latest
+- name: Instalar PhP-Common
+  become: true
+  apt:
+    name: php-common
+    state: latest
+- name: Instalar PhP-MySQL
+  become: true
+  apt:
+    name: php-mysql
+    state: latest
+- name: Instalar PhP-xml
+  become: true
+  apt:
+    name: php-xml
+    state: latest
+- name: Instalar PhP-zip
+  become: true
+  apt:
+    name: php-zip
+    state: latest
+- name: Instalar PhP-curl
+  become: true
+  apt:
+    name: php-curl
+    state: latest
+- name: Instalar PhP-mbstring
+  become: true
+  apt:
+    name: php-mbstring
+    state: latest
+- name: Instalar PhP-xmlrpc
+  become: true
+  apt:
+    name: php-xmlrpc
+    state: latest

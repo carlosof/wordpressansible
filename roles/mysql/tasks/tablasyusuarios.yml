@@ -1,0 +1,15 @@
+- name: Crear base de datos
+  mysql_db:
+    login_user: root
+    login_password: "admin1234"
+    name: wordpress
+    state: present
+
+- name: Usuario wpuser
+  mysql_user:
+    login_user: root
+    login_password: "admin1234"
+    name: wpuser
+    password: admin1234
+    priv: 'wordpress.*:ALL'
+

@@ -1,0 +1,46 @@
+
+- name: Descargar y extraer wordpress
+  unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: /var/www/
+    remote_src: yes
+
+- name: Actualizar sitio por defecto de Apache
+  lineinfile:
+    path: /etc/apache2/sites-enabled/000-default.conf
+    state: present
+    regexp: '(.)+DocumentRoot /var/www/html'
+    line: 'DocumentRoot /var/www/wordpress'
+
+- name: Reiniciar apache2
+  service:
+    name: apache2
+    state: restarted
+
+#- name: Copiar configuracion de wordpress
+#  command: mv /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php
+
+#- name: Actualizar configuracion de apache
+#  lineinfile:
+#    path: /var/www/wordpress/wp-config.php
+#    regexp: "{{item.regexp}}"
+#    line: "{{item.line}}"
+#  with_items:
+#    - {'regexp': "define\\( 'DB_NAME', '(.)+' \\);", 'line': "define( 'DB_NAME', 'wordpress' );"}
+#    - {'regexp': "define\\( 'DB_HOST', '(.)+' \\);", 'line': "define( 'DB_HOST', 'http://161.97.120.168/:3306' );"}
+#    - {'regexp': "define\\( 'DB_USER', '(.)+' \\);", 'line': "define( 'DB_USER', 'root' );"}
+#    - {'regexp': "define\\( 'DB_PASSWORD', '(.)+' \\);", 'line': "define( 'DB_PASSWORD', 'admin1234' );"}
+
+
+- name: Actualizar dueño del directorio wordpress
+  file:
+    path: /var/www/wordpress/
+    state: directory
+    recurse: yes
+    owner: www-data
+
+- name: Permisos directorios wordpress
+  command: find /var/www/wordpress/ -type d -exec chmod 750 {} \;
+
+- name: Permisos archivos wordpress
+  command: find /var/www/wordpress/ -type f -exec chmod 640 {} \;
